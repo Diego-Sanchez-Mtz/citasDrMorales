@@ -113,6 +113,7 @@
             android:layout_marginTop="32dp"
             android:text="Guardar y Continuar"
             app:cornerRadius="8dp"
+            android:backgroundTint="#C87BB39C"
             app:layout_constraintTop_toBottomOf="@id/tilBirthdate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
