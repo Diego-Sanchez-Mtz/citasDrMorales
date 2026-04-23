@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.citasdrmorales.core.FragmentCommunicator
 import com.example.citasdrmorales.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
     private var _binding : FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<SignInViewModel>()
+    private lateinit var communicator: FragmentCommunicator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +27,8 @@ class LoginFragment : Fragment() {
     ): View? {
         //Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        communicator = requireActivity() as FragmentCommunicator
+        communicator.manageLoader(isVisible= true)
         binding.registerButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_fragment_register)
         }
