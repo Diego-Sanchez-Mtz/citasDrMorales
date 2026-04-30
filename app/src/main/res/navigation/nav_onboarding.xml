@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_register"
-        android:name="com.example.citasdrmorales.fragment_register"
+        android:name="com.example.citasdrmorales.signup.fragment_register"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
 </navigation>
