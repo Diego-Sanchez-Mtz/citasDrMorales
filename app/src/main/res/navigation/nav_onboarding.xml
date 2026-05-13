@@ -7,16 +7,33 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.citasdrmorales.LoginFragment"
+        android:name="com.example.citasdrmorales.onboarding.signIn.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_fragment_register"
             app:destination="@id/fragment_register" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeActivity"
+            app:destination="@id/homeActivity" />
     </fragment>
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="com.example.citasdrmorales.home.HomeActivity"
+        android:label="HomeActivity"
+        tools:layout="@layout/activity_home" />
     <fragment
         android:id="@+id/fragment_register"
-        android:name="com.example.citasdrmorales.fragment_register"
+        android:name="com.example.citasdrmorales.onboarding.signUp.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_fragment_register_to_personalInfoFragment"
+            app:destination="@id/personalInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalInfoFragment"
+        android:name="com.example.citasdrmorales.onboarding.personal.PersonalInfoFragment"
+        android:label="PersonalInfoFragment"
+        tools:layout="@layout/fragment_personal_info"/>
 </navigation>
