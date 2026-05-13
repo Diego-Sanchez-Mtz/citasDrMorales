@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/scheduleFragment"
+        android:icon="@drawable/home_ic"
+        android:title="Citas"/>
+
+    <item
+        android:id="@+id/accountFragment"
+        android:icon="@drawable/account_ic"
+        android:title="Cuenta"/>
+
+    <item
+        android:id="@+id/locationFragment"
+        android:icon="@drawable/location_ic"
+        android:title="Ubicación"/>
+
+</menu>
