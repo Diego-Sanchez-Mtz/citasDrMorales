@@ -1,4 +1,4 @@
-package com.example.citasdrmorales
+package com.example.citasdrmorales.onboarding
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -6,17 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import com.example.citasdrmorales.R
 import com.example.citasdrmorales.core.FragmentCommunicator
 import com.example.citasdrmorales.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), FragmentCommunicator {
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -25,8 +27,7 @@ class MainActivity : AppCompatActivity(), FragmentCommunicator {
     }
 
     override fun manageLoader(isVisible: Boolean) {
-        binding.loaderView.isVisible = isVisible
+        binding.loaderContainer.isVisible = isVisible
     }
-
 
 }

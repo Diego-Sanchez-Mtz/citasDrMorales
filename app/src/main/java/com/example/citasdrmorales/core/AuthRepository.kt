@@ -48,7 +48,7 @@ class AuthRepository(): Authentication {
         } catch (e: FirebaseAuthWeakPasswordException){
             ResponseService.Error("La contraseña es muy débil")
         } catch (e: Exception){
-            ResponseService.Error("Error inesperado, intenta más tarde")
+            ResponseService.Error("Error inesperado. Intenta de nuevo> ${e.localizedMessage}")
         }
     }
 

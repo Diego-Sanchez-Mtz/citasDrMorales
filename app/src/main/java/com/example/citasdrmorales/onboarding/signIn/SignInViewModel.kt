@@ -1,6 +1,5 @@
-package com.example.citasdrmorales
+package com.example.citasdrmorales.onboarding.signIn
 
-import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -38,7 +37,7 @@ class SignInViewModel: ViewModel() {
 
 
     fun requestLogin(email: String, password: String){
-        viewModelScope.launch{
+        viewModelScope.launch {
             _signInState.value = ResponseService.Loading
             _signInState.value = repository.requestLogin(email, password)
         }

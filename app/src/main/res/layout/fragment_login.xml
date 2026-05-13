@@ -9,7 +9,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    tools:context=".LoginFragment"
+    tools:context=".onboarding.signIn.LoginFragment"
     app:layout_constraintGuide_percent="0.45" />
 
     <View
@@ -70,6 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress" />
@@ -89,13 +90,14 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/registerButton"
+        android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginHorizontal="16dp"
@@ -115,6 +117,9 @@
         android:layout_marginStart="16dp"
         android:text="Registrarse"
         android:textColor="#009688"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -42,14 +42,6 @@ android {
 }
 
 dependencies {
-    implementation(platform(libs.firebase.bom))
-
-    implementation(libs.firebase.auth)
-    implementation(libs.firebase.firestore)
-
-    implementation(libs.coroutines.core)
-    implementation(libs.coroutines.android)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -58,8 +50,13 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.lottie)
-
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
 }
