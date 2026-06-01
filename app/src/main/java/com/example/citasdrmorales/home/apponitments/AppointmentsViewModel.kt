@@ -20,7 +20,7 @@ class AppointmentsViewModel (
     fun loadAppointments(limit: Int = 5){
         viewModelScope.launch {
             _appointmentState.value = ResponseService.Loading
-            _appointmentState.value = service.getAppontments(limit)
+            _appointmentState.value = service.getAppointments(limit)
         }
     }
 

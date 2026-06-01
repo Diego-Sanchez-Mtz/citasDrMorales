@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 
 class AppointmentRepository: AppointmentService {
     private val api = ApiClient.AppointmentApi
-    override suspend fun getAppontments(limit: Int): ResponseService<List<Appointment>> =
+    override suspend fun getAppointments(limit: Int): ResponseService<List<Appointment>> =
         withContext(Dispatchers.IO){
             try{
                 val response = api.getAppointments()

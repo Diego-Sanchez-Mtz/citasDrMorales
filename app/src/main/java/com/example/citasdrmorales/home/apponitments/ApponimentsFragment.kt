@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.citasdrmorales.R
 import com.example.citasdrmorales.core.FragmentCommunicator
 import com.example.citasdrmorales.core.ResponseService
@@ -23,6 +24,9 @@ class ApponimentsFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<AppointmentsViewModel>()
     private lateinit var communicator: FragmentCommunicator
+    private val adapter = AppointmentsAdapter { appointment ->
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +35,8 @@ class ApponimentsFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentApponimentsBinding.inflate(inflater, container, false)
         communicator = requireActivity() as FragmentCommunicator
+        binding.rvAppointments.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvAppointments.adapter = adapter
         observeState()
         viewModel.loadAppointments()
         return binding.root
@@ -46,7 +52,7 @@ class ApponimentsFragment : Fragment() {
                         }
                         is ResponseService.Success -> {
                             communicator.manageLoader(false)
-                            Log.i("Apponitments", "Song List: ${state.data}")
+                            adapter.submitList(state.data)
                         }
                         is ResponseService.Error -> {
                             communicator.manageLoader(false)
