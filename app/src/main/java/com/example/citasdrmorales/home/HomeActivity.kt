@@ -35,6 +35,6 @@ class HomeActivity : AppCompatActivity(), FragmentCommunicator {
     }
 
     override fun manageLoader(isVisible: Boolean) {
-        TODO("Not yet implemented")
+
     }
 }

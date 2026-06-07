@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_home"
-    app:startDestination="@id/scheduleFragment">
+    app:startDestination="@id/appointmentsFragment">
 
     <fragment
-        android:id="@+id/scheduleFragment"
-        android:name="com.example.citasdrmorales.home.schedule.scheduleFragment"
-        android:label="fragment_schedule"
-        tools:layout="@layout/fragment_schedule" />
+        android:id="@+id/appointmentsFragment"
+        android:name="com.example.citasdrmorales.home.doctors.DoctorsFragment"
+        android:label="fragment_appointments"
+        tools:layout="@layout/fragment_appointments" />
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.example.citasdrmorales.home.account.accountFragment"
+        android:name="com.example.citasdrmorales.home.account.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
     <fragment
-        android:id="@+id/locationFragment"
-        android:name="com.example.citasdrmorales.home.location.locationFragment"
-        android:label="fragment_location"
-        tools:layout="@layout/fragment_location" />
+        android:id="@+id/doctorsFragment"
+        android:name="com.example.citasdrmorales.home.doctors.DoctorsFragment"
+        android:label="fragment_doctors"
+        tools:layout="@layout/fragment_doctors" />
 
 </navigation>

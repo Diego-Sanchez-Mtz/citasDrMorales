@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "https://66ad110b7a3742dc8dea3f9989354eff.api.mockbin.io"
+    private const val BASE_URL = "https://5295aedb9f234add97ec185370e4f3db.api.mockbin.io"
 
     private val loggin = HttpLoggingInterceptor().apply{
         level = HttpLoggingInterceptor.Level.BODY
@@ -14,8 +14,8 @@ object ApiClient {
 
     private val client = OkHttpClient.Builder().addInterceptor(loggin).build()
 
-    val AppointmentApi: AppointmentAPI by lazy {
+    val DoctorApi: DoctorAPI by lazy {
         Retrofit.Builder().baseUrl(BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).build().create(
-            AppointmentAPI::class.java)
+            DoctorAPI::class.java)
     }
 }

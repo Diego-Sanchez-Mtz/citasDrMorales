@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.firebase)
+    alias(libs.plugins.kotlin.parcelize) // <-- Dejamos este para activar Parcelize
 }
 
 android {

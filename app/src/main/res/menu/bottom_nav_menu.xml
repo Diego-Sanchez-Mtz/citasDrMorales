@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
-        android:id="@+id/scheduleFragment"
+        android:id="@+id/appointmentsFragment"
         android:icon="@drawable/home_ic"
-        android:title="Citas"/>
+        android:title="Inicio"/>
 
     <item
         android:id="@+id/accountFragment"
@@ -11,8 +12,8 @@
         android:title="Cuenta"/>
 
     <item
-        android:id="@+id/locationFragment"
+        android:id="@+id/doctorsFragment"
         android:icon="@drawable/location_ic"
-        android:title="Ubicación"/>
+        android:title="Doctores"/>
 
 </menu>

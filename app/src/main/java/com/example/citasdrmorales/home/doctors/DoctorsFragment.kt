@@ -1,7 +1,6 @@
-package com.example.citasdrmorales.home.apponitments
+package com.example.citasdrmorales.home.doctors
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,17 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.citasdrmorales.R
 import com.example.citasdrmorales.core.FragmentCommunicator
 import com.example.citasdrmorales.core.ResponseService
-import com.example.citasdrmorales.databinding.FragmentApponimentsBinding
+import com.example.citasdrmorales.databinding.FragmentAppointmentsBinding
+import com.example.citasdrmorales.databinding.FragmentDoctorsBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
-class ApponimentsFragment : Fragment() {
+class DoctorsFragment : Fragment() {
 
-    private var _binding: FragmentApponimentsBinding? = null
+    private var _binding: FragmentDoctorsBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by viewModels<AppointmentsViewModel>()
+    private val viewModel by viewModels<DoctorsViewModel>()
     private lateinit var communicator: FragmentCommunicator
-    private val adapter = AppointmentsAdapter { appointment ->
+    private val adapter = DoctorsAdapter { appointment ->
 
     }
 
@@ -33,19 +33,19 @@ class ApponimentsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentApponimentsBinding.inflate(inflater, container, false)
+        _binding = FragmentDoctorsBinding.inflate(inflater, container, false)
         communicator = requireActivity() as FragmentCommunicator
-        binding.rvAppointments.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvAppointments.adapter = adapter
+        binding.rvDoctors.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvDoctors.adapter = adapter
         observeState()
-        viewModel.loadAppointments()
+        viewModel.loadDoctors()
         return binding.root
     }
 
     fun observeState(){
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.appointmentState.collect { state ->
+                viewModel.doctorsState.collect { state ->
                     when (state){
                         is ResponseService.Loading -> {
                             communicator.manageLoader(true)

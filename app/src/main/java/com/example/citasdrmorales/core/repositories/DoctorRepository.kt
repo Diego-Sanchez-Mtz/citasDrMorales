@@ -1,18 +1,18 @@
 package com.example.citasdrmorales.core.repositories
 
 import com.example.citasdrmorales.core.ResponseService
-import com.example.citasdrmorales.core.model.Appointment
+import com.example.citasdrmorales.core.model.DoctorModel
 import com.example.citasdrmorales.core.network.ApiClient
-import com.example.citasdrmorales.core.network.AppointmentService
+import com.example.citasdrmorales.core.network.DoctorService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class AppointmentRepository: AppointmentService {
-    private val api = ApiClient.AppointmentApi
-    override suspend fun getAppointments(limit: Int): ResponseService<List<Appointment>> =
+class DoctorRepository: DoctorService {
+    private val api = ApiClient.DoctorApi
+    override suspend fun getDoctors(limit: Int): ResponseService<List<DoctorModel>> =
         withContext(Dispatchers.IO){
             try{
-                val response = api.getAppointments()
+                val response = api.getDoctors()
                 if(response.isSuccessful){
                     val body = response.body()
                     if (body != null){
@@ -25,7 +25,7 @@ class AppointmentRepository: AppointmentService {
                 }
             }catch (e: Exception){
                 ResponseService.Error(
-                    "No se pudieron cargar las citas: ${e.localizedMessage}"
+                    "No se pudo cargar la lista de doctores: ${e.localizedMessage}"
                 )
             }
         }
