@@ -10,10 +10,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.citasdrmorales.R
 import com.example.citasdrmorales.core.FragmentCommunicator
 import com.example.citasdrmorales.core.ResponseService
-import com.example.citasdrmorales.databinding.FragmentAppointmentsBinding
 import com.example.citasdrmorales.databinding.FragmentDoctorsBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch

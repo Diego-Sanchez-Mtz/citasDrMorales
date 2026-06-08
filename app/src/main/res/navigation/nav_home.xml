@@ -7,18 +7,32 @@
 
     <fragment
         android:id="@+id/appointmentsFragment"
-        android:name="com.example.citasdrmorales.home.doctors.DoctorsFragment"
-        android:label="fragment_appointments"
-        tools:layout="@layout/fragment_appointments" />
+        android:name="com.example.citasdrmorales.home.appointments.AppointmentsFragment"
+        android:label="Citas"
+        tools:layout="@layout/fragment_appointments" >
+
+        <action
+            android:id="@+id/action_appointmentsFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.citasdrmorales.home.account.AccountFragment"
-        android:label="fragment_account"
+        android:label="Cuenta"
         tools:layout="@layout/fragment_account" />
+
     <fragment
         android:id="@+id/doctorsFragment"
         android:name="com.example.citasdrmorales.home.doctors.DoctorsFragment"
-        android:label="fragment_doctors"
+        android:label="Doctores"
         tools:layout="@layout/fragment_doctors" />
+
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.example.citasdrmorales.home.schedule.ScheduleFragment"
+        android:label="Agendar Cita"
+        tools:layout="@layout/fragment_schedule" />
 
 </navigation>

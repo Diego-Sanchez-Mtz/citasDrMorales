@@ -19,6 +19,7 @@ coroutinesCore = "1.7.3"
 activityKtx = "1.13.0"
 retrofit = "2.11.0"
 okhttpLoggin = "4.12.0"
+firebaseDatabaseKtx = "22.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +41,7 @@ coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutin
 retrofit = {group ="com.squareup.retrofit2", name ="retrofit", version.ref="retrofit"}
 retrofit-gson = {group ="com.squareup.retrofit2", name ="converter-gson", version.ref="retrofit"}
 okhttp-logging = {group = "com.squareup.okhttp3", name="logging-interceptor", version.ref="okhttpLoggin"}
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
