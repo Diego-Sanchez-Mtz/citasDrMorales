@@ -27,12 +27,21 @@
         android:id="@+id/doctorsFragment"
         android:name="com.example.citasdrmorales.home.doctors.DoctorsFragment"
         android:label="Doctores"
-        tools:layout="@layout/fragment_doctors" />
+        tools:layout="@layout/fragment_doctors" >
+        <action
+            android:id="@+id/action_doctorsFragment_to_doctorDetailFragment"
+            app:destination="@id/doctorDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/scheduleFragment"
         android:name="com.example.citasdrmorales.home.schedule.ScheduleFragment"
         android:label="Agendar Cita"
         tools:layout="@layout/fragment_schedule" />
+    <fragment
+        android:id="@+id/doctorDetailFragment"
+        android:name="com.example.citasdrmorales.home.doctorDetail.DoctorDetailFragment"
+        android:label="fragment_doctor_detail"
+        tools:layout="@layout/fragment_doctor_detail" />
 
 </navigation>

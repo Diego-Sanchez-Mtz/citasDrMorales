@@ -6,7 +6,9 @@ data class DoctorModel(
     @SerializedName("nombre_completo") val nombreCompleto: String,
     @SerializedName("especialidad") val especialidad: String,
     @SerializedName("experiencia") val experiencia: String,
-    @SerializedName("disponibilidad") val disponibilidad: String
+    @SerializedName("disponibilidad") val disponibilidad: String,
+    @SerializedName("correo") val correo: String,
+    @SerializedName("universidad") val universidad: String
 )
 
 data class DoctorResponse(

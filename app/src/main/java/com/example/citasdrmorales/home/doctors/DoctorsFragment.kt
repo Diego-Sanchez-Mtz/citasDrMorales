@@ -10,11 +10,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.citasdrmorales.R
 import com.example.citasdrmorales.core.FragmentCommunicator
 import com.example.citasdrmorales.core.ResponseService
 import com.example.citasdrmorales.databinding.FragmentDoctorsBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
+import androidx.navigation.findNavController
 
 class DoctorsFragment : Fragment() {
 
@@ -22,9 +24,21 @@ class DoctorsFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<DoctorsViewModel>()
     private lateinit var communicator: FragmentCommunicator
-    private val adapter = DoctorsAdapter { appointment ->
+    private val adapter = DoctorsAdapter (
+        onItemClick = { doctor ->
+            val bundle = Bundle().apply {
+                putString("nombre", doctor.nombreCompleto)
+                putString("especialidad", doctor.especialidad)
+                putString("experiencia", doctor.experiencia)
+                putString("disponibilidad", doctor.disponibilidad)
+                putString("correo", doctor.correo)
+                putString("universidad", doctor.universidad)
+            }
 
-    }
+            requireView().findNavController()
+                .navigate(R.id.action_doctorsFragment_to_doctorDetailFragment, bundle)
+        }
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
