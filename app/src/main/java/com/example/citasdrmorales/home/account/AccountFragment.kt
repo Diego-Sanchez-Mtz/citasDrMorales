@@ -38,14 +38,24 @@ class AccountFragment : Fragment() {
 
     private fun setupListeners() {
         binding.btnLogout.setOnClickListener {
-            // 1. Destruye la sesión en Firebase Auth a través del ViewModel
+            // 1. Ocultamos la barra inferior usando su ID real de tu activity_home.xml
+            activity?.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
+                R.id.bottomNavigationView
+            )?.visibility = View.GONE
+
+            // 2. Destruimos la sesión del usuario en Firebase Auth
             viewModel.logout()
 
-            // 2. Desenvuelve el Intent de forma segura para reiniciar la app
-            activity?.intent?.let { safeIntent ->
-                activity?.finish()
-                startActivity(safeIntent)
+            // 3. LA SOLUCIÓN MAESTRA: Creamos un Intent para abrir la MainActivity (Login)
+            // Pero le añadimos flags (banderas) de limpieza absoluta
+            val intent = Intent(requireContext(), com.example.citasdrmorales.onboarding.MainActivity::class.java).apply {
+                // Borra absolutamente todas las actividades que existan en la pila de memoria
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
+
+            // 4. Arrancamos el Login fresco y matamos la pantalla vieja
+            startActivity(intent)
+            activity?.finish()
         }
     }
 
