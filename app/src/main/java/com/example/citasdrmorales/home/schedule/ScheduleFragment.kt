@@ -137,6 +137,9 @@ class ScheduleFragment : Fragment() {
 
             viewModel.saveAppointment(specialty, doctor, dateTime)
         }
+        binding.btnCancelSchedule.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun observeState() {

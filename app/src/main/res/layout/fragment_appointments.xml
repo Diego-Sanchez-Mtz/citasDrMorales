@@ -39,20 +39,25 @@
             android:textSize="16sp"
             android:textAlignment="center"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/btnNavigateToCreate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Agendar mi primera cita"
-            android:backgroundTint="#7BB39C"
-            app:layout_constraintTop_toBottomOf="@id/tvEmptyMessage"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnNavigateToCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="90dp"
+        android:contentDescription="Agendar nueva cita"
+        android:src="@android:drawable/ic_menu_add"
+        app:backgroundTint="#7BB39C"
+        app:tint="@android:color/white"
+        app:elevation="8dp"
+        app:pressedTranslationZ="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -67,8 +67,6 @@ class AppointmentsFragment : Fragment() {
                             communicator.manageLoader(false)
                             val appointments = state.data
 
-                            android.widget.Toast.makeText(requireContext(), "Citas recibidas: ${appointments.size}", android.widget.Toast.LENGTH_SHORT).show()
-
                             if (appointments.isEmpty()) {
                                 // SI NO HAY CITAS: Muestra el aviso y oculta la lista
                                 binding.rvAppointments.isVisible = false
