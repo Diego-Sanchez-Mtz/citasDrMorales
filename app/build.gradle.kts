@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.firebase)
+    alias(libs.plugins.kotlin.parcelize) // <-- Dejamos este para activar Parcelize
 }
 
 android {
@@ -51,10 +52,15 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.lottie)
     implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.firestore)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation("com.google.firebase:firebase-database")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp.logging)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
