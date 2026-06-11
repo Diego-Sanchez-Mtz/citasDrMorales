@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.citasdrmorales.core.ResponseService
 import com.example.citasdrmorales.core.model.AppointmentFirebase
+import com.example.citasdrmorales.core.model.DoctorModel
+import com.example.citasdrmorales.core.network.ApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +16,17 @@ import kotlinx.coroutines.tasks.await
 
 class ScheduleViewModel : ViewModel() {
 
+    private var allDoctors: List<DoctorModel> = emptyList()
+
+    private val _specialties = MutableStateFlow<List<String>>(emptyList())
+    val specialties: StateFlow<List<String>> = _specialties
+
+    private val _filteredDoctors = MutableStateFlow<List<DoctorModel>>(emptyList())
+    val filteredDoctors: StateFlow<List<DoctorModel>> = _filteredDoctors
+
+    private val _loadingState = MutableStateFlow<Boolean>(false)
+    val loadingState: StateFlow<Boolean> = _loadingState
+
     // Estado para controlar el resultado del guardado en Firebase
     private val _saveState = MutableStateFlow<ResponseService<String>?>(null)
     val saveState: StateFlow<ResponseService<String>?> = _saveState.asStateFlow()
@@ -21,6 +34,7 @@ class ScheduleViewModel : ViewModel() {
     private val database = FirebaseDatabase.getInstance()
     private val auth = FirebaseAuth.getInstance()
 
+    /*
     val especialidades = listOf("Seleccionar Especialidad", "Cardiología", "Pediatría", "Medicina General")
 
     private val medicosPorEspecialidad = mapOf(
@@ -31,13 +45,16 @@ class ScheduleViewModel : ViewModel() {
 
     fun getDoctorsForSpecialty(specialty: String): List<String> {
         return listOf("Seleccionar Médico") + (medicosPorEspecialidad[specialty] ?: emptyList())
-    }
+    }*/
 
     //Guardamos la cita en Firebase con el UID del usuario actual
-    fun saveAppointment(specialty: String, doctor: String, dateTime: String) {
+    fun saveAppointment(specialty: String?, doctor: String?, dateTime: String) {
         viewModelScope.launch {
             // Validaciones básicas antes de subir a Firebase
-            if (specialty == "Seleccionar Especialidad" || doctor == "Seleccionar Médico") {
+            if (specialty.isNullOrEmpty()
+                || doctor.isNullOrEmpty()
+                || specialty == "Seleccionar Especialidad"
+                || doctor == "Seleccionar Médico") {
                 _saveState.value = ResponseService.Error("Por favor, selecciona una especialidad y un médico válidos.")
                 return@launch
             }
@@ -79,6 +96,31 @@ class ScheduleViewModel : ViewModel() {
                 _saveState.value = ResponseService.Error(e.localizedMessage ?: "Error al guardar en la base de datos.")
             }
         }
+    }
+
+    fun loadDoctorsForSchedule() {
+        viewModelScope.launch {
+            _loadingState.value = true
+            try {
+                // Invocamos directamente a tu Retrofit
+                val response = ApiClient.DoctorApi.getDoctors()
+
+                if (response.isSuccessful && response.body() != null) {
+                    allDoctors = response.body()!!.results
+
+                    // Extraemos las especialidades del JSON, borramos duplicados con .distinct() y ordenamos
+                    _specialties.value = allDoctors.map { it.especialidad }.distinct().sorted()
+                }
+            } catch (e: Exception) {
+                android.util.Log.e("ScheduleViewModel", "Error al descargar JSON: ${e.message}")
+            } finally {
+                _loadingState.value = false
+            }
+        }
+    }
+
+    fun filterDoctorsBySpecialty(specialty: String) {
+        _filteredDoctors.value = allDoctors.filter { it.especialidad == specialty }
     }
 
     /**

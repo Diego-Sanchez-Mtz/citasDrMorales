@@ -42,6 +42,8 @@ class ScheduleFragment : Fragment() {
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
         communicator = requireActivity() as FragmentCommunicator
 
+        viewModel.loadDoctorsForSchedule()
+
         setupSpinners()
         setupDateTimePickers()
         setupListeners()
@@ -51,33 +53,48 @@ class ScheduleFragment : Fragment() {
     }
 
     private fun setupSpinners() {
-        // Configurar Spinner de Especialidades con la lista del ViewModel
-        val specialtyAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            viewModel.especialidades
-        )
-        specialtyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerEspecialidad.adapter = specialtyAdapter
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.specialties.collect { listSpecialties ->
+                    if (listSpecialties.isNotEmpty()) {
+                        val listaConDefecto = listOf("Seleccionar Especialidad") + listSpecialties
 
-        // 2. Escuchar los cambios de la Especialidad para filtrar los Doctores en tiempo real
-        binding.spinnerEspecialidad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                        val specialtyAdapter = ArrayAdapter(
+                            requireContext(),
+                            android.R.layout.simple_spinner_item,
+                            listaConDefecto
+                        )
+                        specialtyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        binding.spinnerEspecialidad.adapter = specialtyAdapter
+                    }
+                }
+            }
+        }
+
+        binding.spinnerEspecialidad.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedSpecialty = viewModel.especialidades[position]
-
-                // Obtenemos los doctores específicos de esa rama desde el ViewModel
-                val doctorsList = viewModel.getDoctorsForSpecialty(selectedSpecialty)
-
-                val doctorAdapter = ArrayAdapter(
-                    requireContext(),
-                    android.R.layout.simple_spinner_item,
-                    doctorsList
-                )
-                doctorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                binding.spinnerDoctor.adapter = doctorAdapter
+                val selectedSpecialty = binding.spinnerEspecialidad.selectedItem.toString()
+                viewModel.filterDoctorsBySpecialty(selectedSpecialty)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.filteredDoctors.collect { doctorsList ->
+                    val doctorNames =
+                        listOf("Seleccionar Médico") + doctorsList.map { it.nombreCompleto }
+
+                    val doctorAdapter = ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_spinner_item,
+                        doctorNames
+                    )
+                    doctorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.spinnerDoctor.adapter = doctorAdapter
+                }
+            }
         }
     }
 
@@ -163,6 +180,14 @@ class ScheduleFragment : Fragment() {
                             Snackbar.make(binding.root, state.error, Snackbar.LENGTH_LONG).show()
                         }
                         null -> {}
+                    }
+                }
+
+            }
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    viewModel.loadingState.collect { isLoading ->
+                        communicator.manageLoader(isLoading)
                     }
                 }
             }
